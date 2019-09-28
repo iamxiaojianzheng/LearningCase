@@ -1,0 +1,56 @@
+{% extends 'template/base.html' %}
+
+{% include 'hunan/bar.html' %}
+
+{% block container %}
+
+{% for item in searchList %}
+<a href="{% url 'hunan:detail' item.id %}" class="list-group-item" target="_blank">
+    <h4 class="list-group-item-heading">{{ item }}</h4>
+    <p class="list-group-item-text">{{ item.keywords | truncatewords:25 }}</p>
+</a>
+{% empty %}
+<p>抱歉，搜索结果为空</p>
+{% endfor %}
+
+<div>
+    <ul class="pagination">
+        <li>
+            <a href="{{ request.path }}?page=1">&laquo;</a>
+        </li>
+        {% if page_obj.has_previous %}
+        <li>
+            <a href="{{ request.path }}?&page={{ page_obj.previous_page_number }}">上一页</a>
+        </li>
+        {% else %}
+        <li class="previous disabled">
+            <a>上一页</a>
+        </li>
+        {% endif %}
+
+        {% for i in page_obj.paginator.page_range %}
+        {% if page_obj.number >= i|add:-2 %}
+        {% if page_obj.number <= i|add:2 %}
+        <li>
+            <a href="{{ request.path }}?page={{ i }}">{{ i }}</a>
+        </li>
+        {% endif %}
+        {% endif %}
+        {% endfor %}
+
+
+        {% if page_obj.has_next %}
+        <li>
+            <a href="{{ request.path }}?page={{ page_obj.next_page_number }}">下一页</a>
+        </li>
+        {% else %}
+        <li class="previous disabled">
+            <a>下一页</a>
+        </li>
+        {% endif %}
+        <li>
+            <a href="{{ request.path }}?page={{ page_obj.paginator.num_pages }}">&raquo;</a>
+        </li>
+    </ul>
+</div>
+{% endblock %}

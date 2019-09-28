@@ -1,0 +1,28 @@
+{% extends 'template/base.html' %}
+
+{% block title %}
+
+{% endblock %}
+
+{% load static %}
+
+{% block link %}
+{% endblock %}
+
+{% block container %}
+
+    <div class="input-group mt-3 mb-3">
+        <div class="input-group-prepend">
+            <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown">
+                选择网站
+            </button>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" href="https://www.google.com">GOOGLE</a>
+                <a class="dropdown-item" href="https://www.runoob.com">RUNOOB</a>
+                <a class="dropdown-item" href="https://www.taobao.com">TAOBAO</a>
+            </div>
+        </div>
+        <input type="text" class="form-control" placeholder="请选择搜索类型">
+    </div>
+
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends 'template/base.html' %}
+
+{% block title %}{{ data.city }}{% endblock %}
+
+{% load static %}
+
+{% block header %}
+    {% include 'hunan/bar.html' %}
+{% endblock %}
+
+{% block container %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">{{ data.name }}市{{ data.year }}年{{ data.category }}类词云图展示</h3>
+                    </div>
+                    <div class="panel-body">
+                        <img src="{{ STATIC_URL }}hunan/image/{{ data.img_url }}" alt="" width="800px" height="500px">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">关键词Top10</h3>
+                    </div>
+                    <ul class="list-group">
+                        {% for item in topKws %}
+                            <li class="list-group-item">{{ item }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
