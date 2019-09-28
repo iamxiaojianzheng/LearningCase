@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+           http://www.springframework.org/schema/aop 
+           http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+           http://www.springframework.org/schema/context
+           	http://www.springframework.org/schema/context/spring-context-2.5.xsd
+           	http://www.springframework.org/schema/tx 
+           	http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
+ 
+ 
+ <bean id="bookDao" class="com.cc.library.dao.impl.BookDaoImpl">
+ 		<property name="sessionFactory">
+ 			<ref bean="sessionFactory"/>
+ 		</property>
+ 	</bean>
+ 	
+ 	<bean id="bookService" class="com.cc.library.service.impl.BookServiceImpl">
+ 		<property name="bookDao">
+ 			<ref bean="bookDao"/>
+ 		</property>
+ 		<property name="borrowDao">
+ 			<ref bean="borrowDao"/>
+ 		</property>
+ 		<property name="forfeitDao">
+ 			<ref bean="forfeitDao"/>
+ 		</property>
+ 		<property name="bookTypeDao">
+ 			<ref bean="bookTypeDao"/>
+ 		</property>
+ 	</bean>
+ 
+ 		
+ 	<bean id="bookManageAction" class="com.cc.library.action.BookManageAction" scope="prototype">
+ 		<property name="bookService">
+ 			<ref bean="bookService"/>
+ 		</property>
+ 		<property name="bookTypeService">
+ 			<ref bean="bookTypeService"/>
+ 		</property>
+ 	</bean>
+ </beans>

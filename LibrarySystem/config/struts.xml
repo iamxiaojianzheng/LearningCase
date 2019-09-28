@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN"
+	"http://struts.apache.org/dtds/struts-2.1.7.dtd">
+
+<struts>
+
+    <!-- 配置文件改了以后不用重新启动 -->
+    <constant name="struts.devMode" value="false" /><!-- 设置为false不显示详细错误 -->
+
+    <!-- 把struts的请求委托给spring管理, 作用:创建Action实例的过程由spring处理,其他的还是有struts2自己处理 -->
+    <constant name="struts.objectFactory" value="spring" />
+
+    <!-- 配置所有资源文件，省略后缀名，如果配置多个资源文件时，用","隔开。不仅是国际化资源文件 * 类型转换器的错误提示资源文件 * 国际化资源文件 * 上传文件的错误提示信息资源文件 -->
+    <constant name="struts.custom.i18n.resources"
+        value="com.cc.library.action.fileuploadmessage">
+    </constant>
+
+    <!-- 授权 -->
+    <include file="struts2/struts-authorization.xml"></include>
+    <!-- 管理员登录 -->
+    <include file="struts2/struts-admin-login.xml"></include>
+    <!-- 读者登录 -->
+    <include file="struts2/struts-reader-login.xml"></include>
+    <!-- 管理员信息 -->
+    <include file="struts2/struts-admin-info.xml"></include>
+    <!-- 读者信息 -->
+    <include file="struts2/struts-reader-info.xml"></include>
+    <!-- 管理员管理操作 -->
+    <include file="struts2/struts-admin-manage.xml"></include>
+    <!-- 读者管理操作 -->
+    <include file="struts2/struts-reader-manage.xml"></include>
+    <!-- 读者类型管理 -->
+    <include file="struts2/struts-readerType-manage.xml"></include>
+    <!-- 图书类型管理 -->
+    <include file="struts2/struts-bookType-manage.xml"></include>
+    <!-- 图书管理 -->
+    <include file="struts2/struts-book-manage.xml"></include>
+    <!-- 借阅管理 -->
+    <include file="struts2/struts-borrow-manage.xml"></include>
+    <!-- 罚金记录管理 -->
+    <include file="struts2/struts-forfeit-manage.xml"></include>
+    <!-- 还书管理 -->
+    <include file="struts2/struts-back-manage.xml"></include>
+    <!-- 借阅查询 -->
+    <include file="struts2/struts-borrow-search.xml"></include>
+    <!-- 图书 -->
+    <include file="struts2/struts-book.xml"></include>
+    <!-- 借阅 -->
+    <include file="struts2/struts-borrow.xml"></include>
+    <!-- 罚金 -->
+    <include file="struts2/struts-forfeit.xml"></include>
+    <!-- 下载 -->
+    <include file="struts2/struts-download.xml"></include>
+    <!-- 上传 -->
+    <include file="struts2/struts-upload.xml"></include>
+
+</struts>	
