@@ -30,7 +30,7 @@ def gray_and_crop(file_path):
     img = cv2.cvtColor(np.asarray(Image.open(file_path)),cv2.COLOR_RGB2GRAY)
     sobel = cv2.Sobel(img, -1, 1, 1)
     ret, threshold_sobel_img = cv2.threshold(sobel, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
-    
+
     kernel_1 = cv2.getStructuringElement(cv2.MORPH_RECT, (100, 10))
     kernel_2 = cv2.getStructuringElement(cv2.MORPH_RECT, (50, 10))
     kernel_3 = cv2.getStructuringElement(cv2.MORPH_RECT, (10, 10))
@@ -58,20 +58,20 @@ def gray_and_crop(file_path):
         if(width < 100 or height < 40 or width / height < 10):
             continue
         region.append(box)
-    
+
     box = region[-1]
     x1, y1 = box[1][0], box[1][1]
     x2, y2 = box[3][0], box[3][1]
     x1, x2 = min(x1, x2), max(x1, x2)
     y1, y2 = min(y1, y2) - 10, max(y1, y2) + 10
- 
+
     img = cv2.morphologyEx(cv2.threshold(cv2.GaussianBlur(img[y1:y2, x1:x2], (3,3), 0), 0, 255, cv2.THRESH_BINARY+cv2.THRESH_OTSU)[1], cv2.MORPH_OPEN, cv2.getStructuringElement(cv2.MORPH_RECT, (3, 3)), 3)
-    
+
     contours, hierarchy = cv2.findContours(img, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
     for cnt in contours:
         if cv2.contourArea(cnt) < 20:
             cv2.drawContours(img, [cnt], -1, (255, 255, 255), -1)
-    
+
     return Image.fromarray(img)
 
 
@@ -79,12 +79,12 @@ if __name__ == '__main__':
     root = tk.Tk()
     root.withdraw()
     dirpath = filedialog.askdirectory()
-    
+
     if os.path.exists(dirpath):
         print(dirpath)
         # dirpath = args.dir
         files = os.listdir(dirpath)
-        
+
         for name in files:
             filename, ext = os.path.splitext(name)
             # 只匹配图片 跳过本来就是案号命名的文件
